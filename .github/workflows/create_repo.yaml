@@ -5,11 +5,11 @@ on:
   workflow_dispatch:
     inputs:
       repo_name:
-        description: 'Name of the repository to create'
+        description: 'Name of the Repository to create'
         required: true
         type: string
       branch_name:
-        description: 'Initial branch name'
+        description: 'Branch Name'
         required: true
         type: string
 
@@ -33,6 +33,8 @@ jobs:
         run: |
           git clone https://github.com/${{ github.repository_owner }}/${{ inputs.repo_name }}.git
           cd ${{ inputs.repo_name }}
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
           git checkout -b ${{ inputs.branch_name }}
           touch README.md
           git add README.md
