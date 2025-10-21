@@ -35,6 +35,7 @@ jobs:
           cd ${{ inputs.repo_name }}
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
+          git config --global credential.helper "!gh auth git-credential"
           git checkout -b ${{ inputs.branch_name }}
           touch README.md
           git add README.md
