@@ -1,0 +1,40 @@
+
+name: Create Repo with Branch
+
+on:
+  workflow_dispatch:
+    inputs:
+      repo_name:
+        description: 'Name of the repository to create'
+        required: true
+        type: string
+      branch_name:
+        description: 'Initial branch name'
+        required: true
+        type: string
+
+jobs:
+  create-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install GitHub CLI
+        run: |
+          sudo apt update
+          sudo apt install gh
+
+      - name: Authenticate GitHub CLI
+        run: echo "${{ secrets.GH_TOKEN }}" | gh auth login --with-token
+
+      - name: Create Repository
+        run: |
+          gh repo create ${{ inputs.repo_name }} --public --confirm
+
+      - name: Clone and Create Branch
+        run: |
+          git clone https://github.com/${{ github.repository_owner }}/${{ inputs.repo_name }}.git
+          cd ${{ inputs.repo_name }}
+          git checkout -b ${{ inputs.branch_name }}
+          touch README.md
+          git add README.md
+          git commit -m "Initial commit on ${{ inputs.branch_name }}"
+          git push origin ${{ inputs.branch_name }}
