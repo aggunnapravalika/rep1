@@ -1,0 +1,26 @@
+name: Manual Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to release (e.g. v1.0.0)'
+        required: true
+        type: string
+      environment:
+        description: 'Deployment environment'
+        required: true
+        type: string
+        default: 'ite'
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+
+    steps:
+      
+      - name: Create GitHub Release
+        run: |
+            gh release create ${{inputs.tag}} --repo $REPO
+        shell: bash
