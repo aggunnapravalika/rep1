@@ -22,5 +22,5 @@ jobs:
       
       - name: Create GitHub Release
         run: |
-            gh release create ${{inputs.tag}} --repo $REPO
+            gh release create ${{inputs.tag}} --repo ${{ github.repository }}
         shell: bash
