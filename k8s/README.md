@@ -43,3 +43,4 @@ Contact me if you want the README expanded with CI steps, TLS (cert-manager), or
 
 topics:
     helm
+    github_actions
