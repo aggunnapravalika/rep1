@@ -40,3 +40,6 @@ curl -H "Host: nginx.example.com" http://<INGRESS_EXTERNAL_IP>/
 ```
 
 Contact me if you want the README expanded with CI steps, TLS (cert-manager), or split into separate files.
+
+topics:
+    helm
